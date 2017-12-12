@@ -1,0 +1,147 @@
+<Workspace Version="1.3.2.2480" X="183.108914725519" Y="140.131275500742" zoom="0.70823125" ScaleFactor="1" Name="String.ByRevitLanguageType" Description="Depending on the active Revit Language, the suitable input is used." ID="9ba38bd9-dbe5-4a88-9b45-13d3e2db6632" Category="EnjoyBIM">
+  <NamespaceResolutionMap />
+  <Elements>
+    <PythonNodeModels.PythonNode guid="9700cc91-bcb4-45c1-8e57-b1035acf045b" type="PythonNodeModels.PythonNode" nickname="Python Script" x="539.801276058993" y="288.836403278372" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="13">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <PortInfo index="3" default="False" />
+      <PortInfo index="4" default="False" />
+      <PortInfo index="5" default="False" />
+      <PortInfo index="6" default="False" />
+      <PortInfo index="7" default="False" />
+      <PortInfo index="8" default="False" />
+      <PortInfo index="9" default="False" />
+      <PortInfo index="10" default="False" />
+      <PortInfo index="11" default="False" />
+      <PortInfo index="12" default="False" />
+      <Script>import clr
+
+# Import DocumentManager
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+
+clr.AddReference("RevitAPI")
+import Autodesk
+from Autodesk.Revit.DB import *
+
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+
+languageENU=IN[0]
+languageDEU=IN[1]
+languageESP=IN[2]
+languageFRA=IN[3]
+languageITA=IN[4]
+languageCHS=IN[5]
+languageCHT=IN[6]
+languageJPN=IN[7]
+languageKOR=IN[8]
+languageRUS=IN[9]
+languageCSY=IN[10]
+languagePLK=IN[11]
+languagePTB=IN[12]
+
+
+##  CODE to check the language from REVIT ###
+Revitlanguage = app.Language
+	if Revitlanguage == Autodesk.Revit.ApplicationServices.LanguageType.English_USA:
+		result = languageENU
+	elif Revitlanguage == Autodesk.Revit.ApplicationServices.LanguageType.German:
+		result = languageDEU
+	elif Revitlanguage == Autodesk.Revit.ApplicationServices.LanguageType.Spanish:
+		result = languageESP
+	elif Revitlanguage == Autodesk.Revit.ApplicationServices.LanguageType.French:
+		result = languageFRA
+	elif Revitlanguage == Autodesk.Revit.ApplicationServices.LanguageType.Italian:
+		result = languageITA
+	elif Revitlanguage == Autodesk.Revit.ApplicationServices.LanguageType.Chinese_Simplified:
+		result = languageCHS
+	elif Revitlanguage == Autodesk.Revit.ApplicationServices.LanguageType.Chinese_Traditional:
+		result = languageCHT
+	elif Revitlanguage == Autodesk.Revit.ApplicationServices.LanguageType.Japanese:
+		result = languageJPN
+	elif Revitlanguage == Autodesk.Revit.ApplicationServices.LanguageType.Korean:
+		result = languageKOR
+	elif Revitlanguage == Autodesk.Revit.ApplicationServices.LanguageType.Russian:
+		result = languageRUS
+	elif Revitlanguage == Autodesk.Revit.ApplicationServices.LanguageType.Czech:
+		result = languageCSY
+	elif Revitlanguage == Autodesk.Revit.ApplicationServices.LanguageType.Polish:
+		result = languagePLK
+	elif Revitlanguage == Autodesk.Revit.ApplicationServices.LanguageType.Brazilian_Portuguese:
+		result = languagePTB
+	else 
+		result = boom
+
+
+OUT=result</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="4635bd95-1249-48b4-88be-2fd626d473c5" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="744.924235723529" y="290.805607278696" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="ParameterNameByLanguage" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="d29daa8b-f3a0-4905-82ff-7d97301de077" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="48" y="-45" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//English (USA or GB).&#xD;&#xA;EnglishParameterName_ENU : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="f112f391-c359-4004-a88a-195efec1d261" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="20" y="30" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//German.&#xD;&#xA;GermanParameterName_DEU : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="9e334dad-7a42-4078-b9b9-246088b01369" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="19" y="109" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//Spanish.&#xD;&#xA;SpanishParameterName_ESP : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="d7f3f167-22dc-4515-9d6e-9c2fb97435c0" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="26" y="188" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//Frensh.&#xD;&#xA;FrenshParameterName_FRA : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="db658391-b94e-438b-afea-af8888300c47" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="30" y="276" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//Italian.&#xD;&#xA;ItalianParameterName_ITA : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="6b21fd8d-483e-4cd9-a633-935f9c0dde12" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="39" y="361" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//Chinese Simplified.&#xD;&#xA;ChineseSimplifiedParameterName_CHS : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="b956a9c8-6bbe-4c9f-84b6-b87899edfa00" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="40" y="446" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//Chinese Traditional.&#xD;&#xA;ChineseTraditionalParameterName_CHT : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="9965bad5-dfc4-4b02-8567-1ddd7f54cfba" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="47" y="537" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//Japanese.&#xD;&#xA;JapaneseParameterName_JPN : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="3aef8998-e9e9-49aa-b349-453d76089b56" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="50" y="642" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//Korean.&#xD;&#xA;KoreanParameterName_KOR : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="d0da3fb9-b7b6-43f9-8b6d-7f87b4dbee50" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="38" y="729" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//Russian.&#xD;&#xA;RussianParameterName_RUS : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="fabd73ce-f801-4428-84ad-72db59a58fb3" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="31" y="806" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//Czech.&#xD;&#xA;CzechParameterName_CSK : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="a28174c4-1896-4eb8-b5dc-a76c80be41ef" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="-1.72600987607859" y="891.485665707784" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//Brazilian Portuguese.&#xD;&#xA;PortugueseParameterName_PTB : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="dc7dea05-45a5-4e41-9cbf-378d6cb020cc" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="5.10138766987779" y="984.663193291245" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//Polish.&#xD;&#xA;PolishParameterName_PLK : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="9700cc91-bcb4-45c1-8e57-b1035acf045b" start_index="0" end="4635bd95-1249-48b4-88be-2fd626d473c5" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="d29daa8b-f3a0-4905-82ff-7d97301de077" start_index="0" end="9700cc91-bcb4-45c1-8e57-b1035acf045b" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="f112f391-c359-4004-a88a-195efec1d261" start_index="0" end="9700cc91-bcb4-45c1-8e57-b1035acf045b" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="9e334dad-7a42-4078-b9b9-246088b01369" start_index="0" end="9700cc91-bcb4-45c1-8e57-b1035acf045b" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="d7f3f167-22dc-4515-9d6e-9c2fb97435c0" start_index="0" end="9700cc91-bcb4-45c1-8e57-b1035acf045b" end_index="3" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="db658391-b94e-438b-afea-af8888300c47" start_index="0" end="9700cc91-bcb4-45c1-8e57-b1035acf045b" end_index="4" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="6b21fd8d-483e-4cd9-a633-935f9c0dde12" start_index="0" end="9700cc91-bcb4-45c1-8e57-b1035acf045b" end_index="5" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="b956a9c8-6bbe-4c9f-84b6-b87899edfa00" start_index="0" end="9700cc91-bcb4-45c1-8e57-b1035acf045b" end_index="6" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="9965bad5-dfc4-4b02-8567-1ddd7f54cfba" start_index="0" end="9700cc91-bcb4-45c1-8e57-b1035acf045b" end_index="7" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="3aef8998-e9e9-49aa-b349-453d76089b56" start_index="0" end="9700cc91-bcb4-45c1-8e57-b1035acf045b" end_index="8" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="d0da3fb9-b7b6-43f9-8b6d-7f87b4dbee50" start_index="0" end="9700cc91-bcb4-45c1-8e57-b1035acf045b" end_index="9" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="fabd73ce-f801-4428-84ad-72db59a58fb3" start_index="0" end="9700cc91-bcb4-45c1-8e57-b1035acf045b" end_index="10" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="a28174c4-1896-4eb8-b5dc-a76c80be41ef" start_index="0" end="9700cc91-bcb4-45c1-8e57-b1035acf045b" end_index="11" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="dc7dea05-45a5-4e41-9cbf-378d6cb020cc" start_index="0" end="9700cc91-bcb4-45c1-8e57-b1035acf045b" end_index="12" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations />
+  <Presets />
+  <Cameras>
+    <Camera Name="Hintergrundvorschau" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>
